@@ -1,0 +1,23 @@
+Flamingo Additions - Ideas
+
+Flamingo in a Minecart
+Flamingo Crafting Achievement
+Remote Flamingo Wiggle-Maker
+
+BuildCraft:
+Flamingo Pipe (only transports Flamingos, drops anything else)
+Flamingo Gate Trigger (True on adjacent Flamingo)
+Flamingo Gate Action (Makes adjacent Flamingo wiggle)
+Flamingo Robots (make Flamingos nearby wiggle)
+
+OpenComputers:
+Flamingo Driver (flamingo.wiggle())
+
+Forestry:
+Flamingo Bee (produces Flamingos)
+
+Botania:
+Wiggle on being hit by a Mana Burst
+
+hilburn:
+Albino Flamingos (Heresy!)
