@@ -23,7 +23,7 @@ archivesBaseName = "Flamingo"
 
 minecraft {
     version = "1.7.10-10.13.0.1208"
-    assetDir = "eclipse/assets"
+    runDir = "eclipse"
 }
 
 dependencies {
@@ -61,3 +61,22 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+//For Building
+
+def libDir = './build/libs'
+
+task deobfJar(type: Jar) {
+    description = 'Creates a jar file containing the non-obfuscated class files'
+    classifier = 'deobf'
+    destinationDir = file(libDir)
+    from sourceSets.main.output.classesDir
+}
+
+task makeJars << {
+    description = 'Creates the mod files'
+}
+
+makeJars.dependsOn clean, build, deobfJar
+build.shouldRunAfter clean
+deobfJar.shouldRunAfter build
