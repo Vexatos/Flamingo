@@ -1,17 +1,14 @@
 package com.reddit.user.koppeh.flamingo;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 @SideOnly(Side.CLIENT)
-public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer {
+public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEntityFlamingo> {
 
 	private ModelFlamingo model = new ModelFlamingo();
 	private ResourceLocation resource = new ResourceLocation("flamingo", "textures/models/flamingo.png");
@@ -25,8 +22,8 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
-		if (flamingo != null) {
-			if (flamingo.getWorld() != null) {
+		if(flamingo != null) {
+			if(flamingo.getWorld() != null) {
 				rotation = flamingo.getBlockMetadata() * 360 / 16;
 			}
 
@@ -52,8 +49,8 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float par8, int destroyStage) {
-		renderTileEntityAt((TileEntityFlamingo) entity, x, y, z, par8);
+	public void renderTileEntityAt(TileEntityFlamingo entity, double x, double y, double z, float par8, int destroyStage) {
+		renderTileEntityAt(entity, x, y, z, par8);
 	}
 
 }

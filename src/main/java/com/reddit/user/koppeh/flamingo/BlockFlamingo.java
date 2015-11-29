@@ -3,7 +3,6 @@ package com.reddit.user.koppeh.flamingo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -14,12 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFlamingo extends BlockContainer {
+
 	public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
 	public BlockFlamingo() {
@@ -59,9 +58,8 @@ public class BlockFlamingo extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState()
-	{
-		return new BlockState(this, new IProperty[]{ROTATION});
+	protected BlockState createBlockState() {
+		return new BlockState(this, ROTATION);
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class BlockFlamingo extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack stack) {
-		int metadata = Math.round((player.rotationYawHead + 180) * 16 / 360);
+		int metadata = ((Math.round((((player.rotationYawHead + 180) % 360) * 16 / 360)) % 16) + 16) % 16;
 		world.setBlockState(pos, state.withProperty(ROTATION, metadata), 3);
 	}
 
