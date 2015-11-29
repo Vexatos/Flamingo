@@ -1,7 +1,7 @@
 Flamingo
 ========
 
-Flamingo Minecraft mod for Minecraft 1.7.10.
+Flamingo Minecraft mod for Minecraft 1.7.10 and 1.8.8.
 
 Credits:
 
