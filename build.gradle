@@ -57,6 +57,7 @@ task deobfJar(type: Jar) {
     classifier = 'deobf'
     destinationDir = file(libDir)
     from sourceSets.main.output.classesDir
+    from sourceSets.main.output.resourcesDir
 }
 
 task makeJars << {
