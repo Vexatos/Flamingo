@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.3"
+version = "1.7.10-1.5"
 group= "com.reddit.user.koppeh.flamingo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Flamingo"
 
