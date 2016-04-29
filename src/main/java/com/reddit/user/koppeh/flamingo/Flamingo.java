@@ -45,15 +45,15 @@ public class Flamingo {
 			"ooo",
 			" / ",
 
-			'o', new ItemStack(Blocks.wool, 1, 6),
-			'/', Items.stick);
+			'o', new ItemStack(Blocks.WOOL, 1, 6),
+			'/', Items.STICK);
 		GameRegistry.addRecipe(new ItemStack(flamingo),
 			"o  ",
 			"ooo",
 			" / ",
 
-			'o', new ItemStack(Blocks.wool, 1, 6),
-			'/', Items.stick);
+			'o', new ItemStack(Blocks.WOOL, 1, 6),
+			'/', Items.STICK);
 	}
 
 }

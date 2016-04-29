@@ -1,17 +1,20 @@
 package com.reddit.user.koppeh.flamingo;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,31 +23,35 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockFlamingo extends BlockContainer {
 
 	public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
+	private static final AxisAlignedBB FLAMINGO_AABB = new AxisAlignedBB(3 / 16.0F, 0, 3 / 16.0F, 13 / 16.0F, 1, 13 / 16.0F);
 
 	public BlockFlamingo() {
-		super(Material.cloth);
+		super(Material.CLOTH);
 		setHardness(1.5f);
-		setStepSound(Block.soundTypeCloth);
-		setBlockBounds(3 / 16.0F, 0, 3 / 16.0F, 13 / 16.0F, 1, 13 / 16.0F);
+		setSoundType(SoundType.CLOTH);
 		setUnlocalizedName("flamingo.flamingo");
 		GameRegistry.registerBlock(this, "flamingo.flamingo");
-		setCreativeTab(CreativeTabs.tabDecorations);
+		setCreativeTab(CreativeTabs.DECORATIONS);
+	}
+
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return FLAMINGO_AABB;
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube() {
+	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int getRenderType() {
-		return 2;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
@@ -58,8 +65,9 @@ public class BlockFlamingo extends BlockContainer {
 	}
 
 	@Override
-	protected BlockState createBlockState() {
-		return new BlockState(this, ROTATION);
+	protected BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer(this, ROTATION);
 	}
 
 	@Override
