@@ -19,5 +19,4 @@ public class TileEntityFlamingo extends TileEntity implements ITickable {
 		wiggleStrength = Math.min(40.0F, wiggleStrength + 15.0F);
 		return true;
 	}
-
 }
