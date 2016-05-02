@@ -19,12 +19,12 @@ public class TileEntityFlamingo extends TileEntity implements ITickable {
 
 	@Override
 	public boolean receiveClientEvent(int par1, int par2) {
-		wiggle(DEFAULT_WIGGLE_STRENGTH_PER_CLICK);
+		wiggle();
 		return true;
 	}
 
-	public void wiggle(float strength) {
-		wiggleStrength = Math.max(0.0F, Math.min(MAX_WIGGLE_STRENGTH, wiggleStrength + strength));
+	public void wiggle() {
+		wiggleStrength = Math.max(0.0F, Math.min(MAX_WIGGLE_STRENGTH, wiggleStrength + DEFAULT_WIGGLE_STRENGTH_PER_CLICK));
 	}
 
 }

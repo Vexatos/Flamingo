@@ -1,11 +1,11 @@
 package com.reddit.user.koppeh.flamingo;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEntityFlamingo> {
@@ -13,44 +13,44 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEn
 	private ModelFlamingo model = new ModelFlamingo();
 	private ResourceLocation resource = new ResourceLocation("flamingo", "textures/models/flamingo.png");
 
-	public void renderTileEntityAt(TileEntityFlamingo flamingo, double x, double y, double z, float par8) {
+	@Override
+	public void renderTileEntityAt(TileEntityFlamingo flamingo, double x, double y, double z, float partialTicks, int destroyStage) {
 		int rotation = 0;
 		float wiggle = 0;
 
+		GlStateManager.enableDepth();
+		GlStateManager.depthFunc(GL11.GL_LEQUAL);
+		GlStateManager.depthMask(true);
+
 		bindTexture(resource);
 
-		GL11.glPushMatrix();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GlStateManager.pushMatrix();
+		GlStateManager.enableRescaleNormal();
+
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		if(flamingo != null) {
 			if(flamingo.getWorld() != null) {
 				rotation = flamingo.getBlockMetadata() * 360 / 16;
 			}
 
-			wiggle = (float) Math.sin(flamingo.wiggle + par8) * flamingo.wiggleStrength;
+			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
 		}
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glTranslated(x, y + 2.0, z + 1.0);
-		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		GL11.glTranslated(0.5F, 0.5F, 0.5F);
-		GL11.glRotatef(rotation, 0.0F, 1.0F, 0.0F);
-		GL11.glTranslated(0.0, 1.5, 0.0);
-		GL11.glRotatef(wiggle, 0.0F, 0.0F, 1.0F);
-		GL11.glTranslated(0.0, -1.5, 0.0);
+		GlStateManager.translate(x, y + 2.0, z + 1.0);
+		GlStateManager.scale(1.0F, -1.0F, -1.0F);
+		GlStateManager.translate(0.5F, 0.5F, 0.5F);
+		GlStateManager.rotate(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translate(0.0, 1.5, 0.0);
+		GlStateManager.rotate(wiggle, 0.0F, 0.0F, 1.0F);
+		GlStateManager.translate(0.0, -1.5, 0.0);
 
 		model.renderAll();
 
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+		GlStateManager.disableRescaleNormal();
+		GlStateManager.popMatrix();
 
-		GL11.glPopMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntityFlamingo entity, double x, double y, double z, float par8, int destroyStage) {
-		renderTileEntityAt(entity, x, y, z, par8);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 }
