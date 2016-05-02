@@ -20,4 +20,8 @@ public class TileEntityFlamingo extends TileEntity implements ITickable {
 		return true;
 	}
 
+	@Override
+	public boolean canRenderBreaking() {
+		return true;
+	}
 }
