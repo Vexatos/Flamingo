@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -30,7 +31,9 @@ public class BlockFlamingo extends BlockContainer {
 		setHardness(1.5f);
 		setSoundType(SoundType.CLOTH);
 		setUnlocalizedName("flamingo.flamingo");
-		GameRegistry.registerBlock(this, "flamingo.flamingo");
+		setRegistryName("flamingo.flamingo");
+		GameRegistry.register(this);
+		GameRegistry.register(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setCreativeTab(CreativeTabs.DECORATIONS);
 	}
 

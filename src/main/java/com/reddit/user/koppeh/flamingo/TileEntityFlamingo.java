@@ -5,6 +5,9 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityFlamingo extends TileEntity implements ITickable {
 
+	public static final float MAX_WIGGLE_STRENGTH = 40.0F;
+	public static final float DEFAULT_WIGGLE_STRENGTH_PER_CLICK = 15.0F;
+
 	public float wiggle = 0;
 	public float wiggleStrength = 0.0F;
 
@@ -16,8 +19,12 @@ public class TileEntityFlamingo extends TileEntity implements ITickable {
 
 	@Override
 	public boolean receiveClientEvent(int par1, int par2) {
-		wiggleStrength = Math.min(40.0F, wiggleStrength + 15.0F);
+		wiggle(DEFAULT_WIGGLE_STRENGTH_PER_CLICK);
 		return true;
+	}
+
+	public void wiggle(float strength) {
+		wiggleStrength = Math.max(0.0F, Math.min(MAX_WIGGLE_STRENGTH, wiggleStrength + strength));
 	}
 
 }
