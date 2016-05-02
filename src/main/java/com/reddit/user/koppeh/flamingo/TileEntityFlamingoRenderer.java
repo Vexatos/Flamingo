@@ -22,22 +22,12 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEn
 		GlStateManager.depthFunc(GL11.GL_LEQUAL);
 		GlStateManager.depthMask(true);
 
-		if(destroyStage >= 0) {
-			bindTexture(DESTROY_STAGES[destroyStage]);
-			GlStateManager.matrixMode(GL11.GL_TEXTURE);
-			GlStateManager.pushMatrix();
-			GlStateManager.scale(4.0F, 4.0F, 1.0F);
-			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
-		} else {
-			bindTexture(resource);
-		}
+		bindTexture(resource);
 
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 
-		if(destroyStage < 0) {
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-		}
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 		if(flamingo != null) {
 			if(flamingo.getWorld() != null) {
@@ -61,12 +51,6 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEn
 		GlStateManager.popMatrix();
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-
-		if(destroyStage >= 0) {
-			GlStateManager.matrixMode(GL11.GL_TEXTURE);
-			GlStateManager.popMatrix();
-			GlStateManager.matrixMode(GL11.GL_MODELVIEW);
-		}
 	}
 
 }
