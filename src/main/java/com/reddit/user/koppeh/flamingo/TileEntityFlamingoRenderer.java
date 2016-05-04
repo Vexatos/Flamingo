@@ -1,11 +1,20 @@
 package com.reddit.user.koppeh.flamingo;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEntityFlamingo> {
@@ -51,6 +60,64 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEn
 		GlStateManager.popMatrix();
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-	}
 
+		if(flamingo == null || !flamingo.hasCustomName()) {
+			return;
+		}
+
+		RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+		if(renderManager == null || renderManager.renderViewEntity == null) {
+			return;
+		}
+
+		if(renderManager.renderViewEntity.getDistanceSqToCenter(flamingo.getPos()) >= RenderLivingBase.NAME_TAG_RANGE * RenderLivingBase.NAME_TAG_RANGE) {
+			return;
+		}
+
+		String customName = flamingo.getDisplayName().getFormattedText();
+
+		GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(x + 0.5D, y + 1.5D, z + 0.5D);
+		GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+		GlStateManager.rotate((renderManager.options.thirdPersonView == 2 ? -1.0F : 1.0F) * renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+		GlStateManager.scale(-0.025F, -0.025F, 0.025F);
+		GlStateManager.disableLighting();
+		GlStateManager.depthMask(false);
+
+		GlStateManager.disableDepth();
+
+		GlStateManager.enableBlend();
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+
+		FontRenderer fontrenderer = getFontRenderer();
+		int offsetX = fontrenderer.getStringWidth(customName) / 2;
+
+		GlStateManager.disableTexture2D();
+
+		Tessellator t = Tessellator.getInstance();
+		VertexBuffer vb = t.getBuffer();
+		vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+		vb.pos(-offsetX - 1.0D, -1.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+		vb.pos(-offsetX - 1.0D, 8.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+		vb.pos(offsetX + 1.0D, 8.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+		vb.pos(offsetX + 1.0D, -1.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+		t.draw();
+
+		GlStateManager.enableTexture2D();
+
+		fontrenderer.drawString(customName, -offsetX, 0, 553648127);
+
+		GlStateManager.enableDepth();
+		GlStateManager.depthMask(true);
+
+		fontrenderer.drawString(customName, -offsetX, 0, -1);
+
+		GlStateManager.enableLighting();
+		GlStateManager.disableBlend();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.popMatrix();
+	}
 }
+
