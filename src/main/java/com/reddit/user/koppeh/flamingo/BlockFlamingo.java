@@ -37,16 +37,20 @@ public class BlockFlamingo extends BlockContainer {
 		setCreativeTab(CreativeTabs.DECORATIONS);
 	}
 
+	@Override
+	@Deprecated
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return FLAMINGO_AABB;
 	}
 
 	@Override
+	@Deprecated
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
+	@Deprecated
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
@@ -63,6 +67,7 @@ public class BlockFlamingo extends BlockContainer {
 	}
 
 	@Override
+	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
 		return getDefaultState().withProperty(ROTATION, meta);
 	}
