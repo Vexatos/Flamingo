@@ -12,7 +12,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.9.4-1.7"
+version = "1.9.4-1.8"
 group= "com.reddit.user.koppeh.flamingo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Flamingo"
 
