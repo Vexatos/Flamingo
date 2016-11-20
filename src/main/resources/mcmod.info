@@ -1,6 +1,6 @@
 [
   {
-    "modid": "Flamingo",
+    "modid": "flamingo",
     "name": "Pink Flamingo",
     "version": "${version}",
     "description": "Adds a decorative pink flamingo block.",

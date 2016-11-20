@@ -12,12 +12,12 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.9.4-1.8"
+version = "1.11-1.9"
 group= "com.reddit.user.koppeh.flamingo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Flamingo"
 
 minecraft {
-    version = '1.9.4-12.17.0.1940'
+    version = '1.11-13.19.0.2153'
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -25,7 +25,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = 'snapshot_20160519'
+    mappings = 'snapshot_20161118'
 }
 
 processResources

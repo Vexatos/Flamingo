@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = "Flamingo", version = "1.8.8-1.4", useMetadata = true)
+@Mod(modid = "flamingo", version = "1.11-1.9", useMetadata = true)
 public class Flamingo {
 
 	@Instance("Flamingo")
