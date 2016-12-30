@@ -2,6 +2,7 @@ package com.reddit.user.koppeh.flamingo;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -15,6 +16,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	protected void registerTileEntities() {
 		super.registerTileEntities();
+		LanguageRegistry.addName(Flamingo.flamingo, "Flamingo");
 		flamingoRenderId = registerTileEntityRenderer(TileEntityFlamingo.class, new TileEntityFlamingoRenderer());
 	}
 

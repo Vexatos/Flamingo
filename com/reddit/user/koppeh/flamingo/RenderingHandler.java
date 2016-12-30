@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -33,7 +33,7 @@ public class RenderingHandler implements ISimpleBlockRenderingHandler {
 		this.tileEntityRenderer = tileEntityRenderer;
 		this.render3dInInventory = render3dInInventory;
 
-		tileEntityRenderer.func_147497_a(TileEntityRendererDispatcher.instance);
+		tileEntityRenderer.setTileEntityRenderer(TileEntityRenderer.instance);
 		renderId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
@@ -54,7 +54,7 @@ public class RenderingHandler implements ISimpleBlockRenderingHandler {
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelId) {
+	public boolean shouldRender3DInInventory() {
 		return render3dInInventory;
 	}
 

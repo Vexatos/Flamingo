@@ -6,9 +6,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 
 @Mod(modid = "Flamingo", version = "1.7.10-1.3", useMetadata = true)
 public class Flamingo {
@@ -20,21 +21,23 @@ public class Flamingo {
 		serverSide = "com.reddit.user.koppeh.flamingo.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static Configuration config;
 	public static BlockFlamingo flamingo;
 
-	@Mod.EventHandler
+	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event) {
-		initializeItems();
+		config = new Configuration(event.getSuggestedConfigurationFile());
+		config.load();
+
+		flamingo = new BlockFlamingo(config.getBlock("flamingo", "flamingo", 3755).getInt());
+
+		config.save();
 	}
 
-	@Mod.EventHandler
+	@Mod.Init
 	public void load(FMLInitializationEvent event) {
 		addRecipes();
 		proxy.init();
-	}
-
-	private void initializeItems() {
-		flamingo = new BlockFlamingo();
 	}
 
 	private void addRecipes() {
@@ -43,15 +46,15 @@ public class Flamingo {
 			"ooo",
 			" / ",
 
-			'o', new ItemStack(Blocks.wool, 1, 6),
-			'/', Items.stick);
+			'o', new ItemStack(Block.cloth, 1, 6),
+			'/', Item.stick);
 		GameRegistry.addRecipe(new ItemStack(flamingo),
 			"o  ",
 			"ooo",
 			" / ",
 
-			'o', new ItemStack(Blocks.wool, 1, 6),
-			'/', Items.stick);
+			'o', new ItemStack(Block.cloth, 1, 6),
+			'/', Item.stick);
 	}
 
 }

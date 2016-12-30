@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GL12;
 public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer {
 
 	private ModelFlamingo model = new ModelFlamingo();
-	private ResourceLocation resource = new ResourceLocation("flamingo", "textures/models/flamingo.png");
 
 	public void renderTileEntityAt(TileEntityFlamingo flamingo, double x, double y, double z, float par8) {
 
@@ -23,10 +22,11 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer {
 
 		float wiggle = (float) Math.sin(flamingo.wiggle + par8) * flamingo.wiggleStrength;
 
-		bindTexture(resource);
+		ForgeHooksClient.bindTexture("/com/reddit/user/koppeh/flamingo/flamingo.png", 0);
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glTranslated(x, y + 2.0, z + 1.0);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);

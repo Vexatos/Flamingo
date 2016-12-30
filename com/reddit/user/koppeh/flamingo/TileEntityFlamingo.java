@@ -14,9 +14,8 @@ public class TileEntityFlamingo extends TileEntity {
 	}
 
 	@Override
-	public boolean receiveClientEvent(int par1, int par2) {
+	public void receiveClientEvent(int par1, int par2) {
 		wiggleStrength = Math.min(40.0F, wiggleStrength + 15.0F);
-		return true;
 	}
 
 }

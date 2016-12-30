@@ -2,7 +2,7 @@
 
 # folders
 !/gradle
-!/src
+!/com
 
 # files
 !/.gitignore
