@@ -87,6 +87,14 @@ public class BlockFlamingo extends BlockContainer {
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase player, ItemStack stack) {
 		int metadata = ((Math.round((((player.rotationYawHead + 180) % 360) * 16 / 360)) % 16) + 16) % 16;
 		world.setBlockState(pos, state.withProperty(ROTATION, metadata), 3);
+
+		if(stack.hasDisplayName()) {
+			TileEntity entity = world.getTileEntity(pos);
+			if(entity instanceof TileEntityFlamingo) {
+				((TileEntityFlamingo) entity).setCustomName(stack.getDisplayName());
+			}
+		}
+
 	}
 
 	@Override
