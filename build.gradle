@@ -7,17 +7,17 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.11-1.9"
+version = "1.12-1.10"
 group= "com.reddit.user.koppeh.flamingo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Flamingo"
 
 minecraft {
-    version = '1.11-13.19.0.2153'
+    version = '1.12-14.21.0.2324'
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -25,7 +25,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = 'snapshot_20161118'
+    mappings = 'snapshot_20170614'
 }
 
 processResources

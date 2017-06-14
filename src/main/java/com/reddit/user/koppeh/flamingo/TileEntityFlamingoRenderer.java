@@ -14,7 +14,7 @@ public class TileEntityFlamingoRenderer extends TileEntitySpecialRenderer<TileEn
 	private ResourceLocation resource = new ResourceLocation("flamingo", "textures/models/flamingo.png");
 
 	@Override
-	public void renderTileEntityAt(TileEntityFlamingo flamingo, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void renderTileEntityAt(TileEntityFlamingo flamingo, double x, double y, double z, float partialTicks, int destroyStage, float hi) {
 		int rotation = 0;
 		float wiggle = 0;
 
