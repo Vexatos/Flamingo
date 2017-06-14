@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = "flamingo", version = "1.11-1.9", useMetadata = true)
+@Mod(modid = "flamingo", version = "1.12-1.10", useMetadata = true)
 public class Flamingo {
 
 	@Instance("Flamingo")
@@ -31,29 +31,11 @@ public class Flamingo {
 
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
-		addRecipes();
 		proxy.registerRenderers();
 	}
 
 	private void initializeItems() {
 		flamingo = new BlockFlamingo();
-	}
-
-	private void addRecipes() {
-		GameRegistry.addRecipe(new ItemStack(flamingo),
-			"  o",
-			"ooo",
-			" / ",
-
-			'o', new ItemStack(Blocks.WOOL, 1, 6),
-			'/', Items.STICK);
-		GameRegistry.addRecipe(new ItemStack(flamingo),
-			"o  ",
-			"ooo",
-			" / ",
-
-			'o', new ItemStack(Blocks.WOOL, 1, 6),
-			'/', Items.STICK);
 	}
 
 }
