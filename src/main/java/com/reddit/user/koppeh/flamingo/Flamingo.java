@@ -1,8 +1,5 @@
 package com.reddit.user.koppeh.flamingo;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -10,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = "flamingo", version = "1.12-1.10", useMetadata = true)
+@Mod(modid = "flamingo", version = "1.12-1.11", useMetadata = true, dependencies = "required-after:forge@[14.21.1.2395,)")
 public class Flamingo {
 
 	@Instance("Flamingo")

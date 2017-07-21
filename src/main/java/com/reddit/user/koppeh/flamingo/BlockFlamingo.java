@@ -1,5 +1,6 @@
 package com.reddit.user.koppeh.flamingo;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -32,8 +34,8 @@ public class BlockFlamingo extends BlockContainer {
 		setSoundType(SoundType.CLOTH);
 		setUnlocalizedName("flamingo.flamingo");
 		setRegistryName("flamingo.flamingo");
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlock(this).setRegistryName(getRegistryName()));
+		GameRegistry.findRegistry(Block.class).register(this);
+		GameRegistry.findRegistry(Item.class).register(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setCreativeTab(CreativeTabs.DECORATIONS);
 	}
 
