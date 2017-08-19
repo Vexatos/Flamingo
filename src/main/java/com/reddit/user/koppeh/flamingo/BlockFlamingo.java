@@ -5,16 +5,20 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -34,9 +38,12 @@ public class BlockFlamingo extends BlockContainer {
 		setSoundType(SoundType.CLOTH);
 		setUnlocalizedName("flamingo.flamingo");
 		setRegistryName("flamingo.flamingo");
-		GameRegistry.findRegistry(Block.class).register(this);
-		GameRegistry.findRegistry(Item.class).register(new ItemBlock(this).setRegistryName(getRegistryName()));
 		setCreativeTab(CreativeTabs.DECORATIONS);
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return face == EnumFacing.DOWN ? BlockFaceShape.CENTER_SMALL : BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
@@ -91,8 +98,7 @@ public class BlockFlamingo extends BlockContainer {
 		world.setBlockState(pos, state.withProperty(ROTATION, metadata), 3);
 	}
 
-	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
+	protected void wiggle(World world, BlockPos pos) {
 		if(world.isRemote) {
 			return;
 		}
@@ -101,5 +107,17 @@ public class BlockFlamingo extends BlockContainer {
 			return;
 		}
 		world.addBlockEvent(pos, this, 0, 0);
+	}
+
+	@Override
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
+		wiggle(world, pos);
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if (entityIn instanceof IProjectile) {
+			wiggle(worldIn, pos);
+		}
 	}
 }
