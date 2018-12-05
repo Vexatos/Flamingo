@@ -1,9 +1,10 @@
 package com.reddit.user.koppeh.flamingo;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.Tickable;
 
-public class TileEntityFlamingo extends TileEntity implements ITickable {
+public class FlamingoBlockEntity extends BlockEntity implements Tickable {
 
 	public static final float MAX_WIGGLE_STRENGTH = 40.0F;
 	public static final float DEFAULT_WIGGLE_STRENGTH_PER_CLICK = 15.0F;
@@ -11,16 +12,18 @@ public class TileEntityFlamingo extends TileEntity implements ITickable {
 	float wiggle = 0;
 	float wiggleStrength = 0.0F;
 
-	@Override
-	public void update() {
-		wiggle++;
-		wiggleStrength = Math.max(0.0F, wiggleStrength * 0.9F - 0.1F);
+	public FlamingoBlockEntity(BlockEntityType<?> type) {
+		super(type);
+	}
+
+	public FlamingoBlockEntity() {
+		this(Flamingo.FLAMINGO_BLOCK_ENTITY);
 	}
 
 	@Override
-	public boolean receiveClientEvent(int par1, int par2) {
-		wiggle();
-		return true;
+	public void tick() {
+		wiggle++;
+		wiggleStrength = Math.max(0.0F, wiggleStrength * 0.9F - 0.1F);
 	}
 
 	public void wiggle() {

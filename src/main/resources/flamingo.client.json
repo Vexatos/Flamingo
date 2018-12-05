@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.reddit.user.koppeh.flamingo.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"ItemBuiltinRendererMixin"
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  }
+}

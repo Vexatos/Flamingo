@@ -1,0 +1,8 @@
+{
+  "id": "flamingo",
+  "name": "Pink Flamingo",
+  "version": "0.1.0",
+  "side": "universal",
+  "initializer": "com.reddit.user.koppeh.flamingo.Flamingo",
+  "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live."
+}

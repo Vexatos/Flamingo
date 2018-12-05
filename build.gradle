@@ -1,69 +1,81 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
-}
-apply plugin: 'net.minecraftforge.gradle.forge'
+import net.fabricmc.loom.LoomGradlePlugin
 
-version = "1.12-1.11"
-group= "com.reddit.user.koppeh.flamingo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+buildscript {
+	repositories {
+		jcenter()
+		maven {
+			name = 'Fabric'
+			url = 'http://maven.modmuss50.me/'
+		}
+	}
+	dependencies {
+		classpath "net.fabricmc:fabric-loom:0.0.14-SNAPSHOT"
+	}
+}
+
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+}
+
+apply plugin: LoomGradlePlugin
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group= "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
+version = "0.1.0"
+
+def ENV = System.getenv()
+if (ENV.BUILD_NUMBER) {
+	version = version + "-" + "${System.getenv().BUILD_NUMBER}"
+}
 
 minecraft {
-    version = '1.12-14.21.1.2395'
-    runDir = "run"
-    
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not allways work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = 'snapshot_20170717'
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+dependencies {
+	minecraft "com.mojang:minecraft:18w48b"
+	mappings "net.fabricmc:pomf:18w48b.23"
+	modCompile "net.fabricmc:fabric-loader:0.1.0.51"
+	modCompile "net.fabricmc:fabric:0.0.3-SNAPSHOT"
 }
 
-//For Building
-
-def libDir = './build/libs'
-
-task deobfJar(type: Jar) {
-    description = 'Creates a jar file containing the non-obfuscated class files'
-    classifier = 'deobf'
-    destinationDir = file(libDir)
-    from sourceSets.main.output.classesDir
-    from sourceSets.main.output.resourcesDir
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			//This is used when the build is done on a slave node
+			if (project.hasProperty('mavenPass')) {
+				println 'Uploading to remote Maven Repo'
+				repository(url: "http://mavenupload.modmuss50.me/") {
+					authentication(userName: "buildslave", password: project.getProperty('mavenPass'))
+				}
+			} else {
+				//this is when the build is executed on the master node
+				println 'Uploading to local Maven Repo'
+				repository(url: "file:///var/www/maven/")
+			}
+			pom {
+				groupId = project.group
+				version = project.version
+				artifactId = project.archivesBaseName
+				project {
+					name project.archivesBaseName
+					packaging 'jar'
+					description project.archivesBaseName
+					url 'https://github.com/ProfessorProspector/Flamingo'
+					scm {
+						url 'https://github.com/ProfessorProspector/Flamingo'
+						connection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
+						developerConnection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
+					}
+				}
+			}
+		}
+	}
 }
-
-task makeJars << {
-    description = 'Creates the mod files'
-}
-
-makeJars.dependsOn clean, build, deobfJar
-build.shouldRunAfter clean
-deobfJar.shouldRunAfter build
