@@ -23,8 +23,8 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BreakIn
 	public static final IntegerProperty ROTATION = IntegerProperty.create("rotation", 0, 15);
 	private static final VoxelShapeContainer BOUNDING_SHAPE = Block.createCubeShape(3, 0, 3, 13, 1, 13);
 
-	public FlamingoBlock(Builder builder) {
-		super(builder);
+	public FlamingoBlock(Settings settings) {
+		super(settings);
 	}
 
 	@Override

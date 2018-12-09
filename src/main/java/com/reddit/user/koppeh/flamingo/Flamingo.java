@@ -4,9 +4,9 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.fabricmc.fabric.client.render.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.helpers.FabricBlockBuilder;
-import net.fabricmc.fabric.networking.CustomPayloadHandlerRegistry;
+import net.fabricmc.fabric.networking.CustomPayloadPacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
@@ -14,9 +14,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.server.network.packet.CustomPayloadServerPacket;
-import net.minecraft.sortme.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
@@ -33,13 +33,13 @@ public class Flamingo implements ModInitializer {
 	public static final Identifier WIGGLE = new Identifier(Flamingo.MOD_ID, "wiggle");
 
 	static {
-		FLAMINGO_BLOCK = register("flamingo", new FlamingoBlock(FabricBlockBuilder.create(Material.WOOL).setMapColor(MaterialColor.PINK).setHardness(1.5F).setSoundGroup(BlockSoundGroup.WOOL).build()), ItemGroup.DECORATIONS);
+		FLAMINGO_BLOCK = register("flamingo", new FlamingoBlock(FabricBlockSettings.create(Material.WOOL).setMapColor(MaterialColor.PINK).setHardness(1.5F).setSoundGroup(BlockSoundGroup.WOOL).build()), ItemGroup.DECORATIONS);
 		FLAMINGO_BLOCK_ENTITY = register("flamingo", BlockEntityType.Builder.create(FlamingoBlockEntity::new));
 	}
 
 	public static Block register(String name, Block block, ItemGroup tab) {
 		Registry.register(Registry.BLOCKS, MOD_ID + ":" + name, block);
-		BlockItem item = new BlockItem(block, new Item.Builder().itemGroup(tab));
+		BlockItem item = new BlockItem(block, new Item.Settings().itemGroup(tab));
 		item.registerBlockItemMap(Item.BLOCK_ITEM_MAP, item);
 		register(name, item);
 		return block;
@@ -59,7 +59,7 @@ public class Flamingo implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		BlockEntityRendererRegistry.INSTANCE.register(FlamingoBlockEntity.class, new FlamingoBlockEntityRenderer());
-		CustomPayloadHandlerRegistry.CLIENT.register(WIGGLE, (packetContext, packetByteBuf) -> {
+		CustomPayloadPacketRegistry.CLIENT.register(WIGGLE, (packetContext, packetByteBuf) -> {
 			BlockPos pos = packetByteBuf.readBlockPos();
 			if (packetContext.getPlayer() != null && packetContext.getPlayer().getEntityWorld() != null) {
 				BlockEntity blockEntity = packetContext.getPlayer().getEntityWorld().getBlockEntity(pos);
