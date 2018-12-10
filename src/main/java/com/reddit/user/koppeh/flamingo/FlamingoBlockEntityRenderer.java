@@ -1,7 +1,10 @@
 package com.reddit.user.koppeh.flamingo;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.BlockView;
+import org.lwjgl.opengl.GL11;
 
 public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlockEntity> {
 
@@ -10,7 +13,7 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 
 	@Override
 	public void render(FlamingoBlockEntity flamingo, double x, double y, double z, float partialTicks, int destroyStage) {
-		/*int rotation = 0;
+		int rotation = 0;
 		float wiggle = 0;
 
 		GlStateManager.enableDepthTest();
@@ -25,8 +28,9 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		if (flamingo != null) {
-			if (flamingo.getWorld() != null) {
-				rotation = getWorld().getBlockState(flamingo.getPos()).get(FlamingoBlock.ROTATION) * 360 / 16;
+			final BlockView world = flamingo.getWorld();
+			if (world != null) {
+				rotation = world.getBlockState(flamingo.getPos()).get(FlamingoBlock.ROTATION) * 360 / 16;
 			}
 
 			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
@@ -45,7 +49,7 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
 
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);*/
+		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 }
