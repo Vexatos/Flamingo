@@ -19,9 +19,9 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 		GlStateManager.enableDepthTest();
 		GlStateManager.depthFunc(GL11.GL_LEQUAL);
 		GlStateManager.depthMask(true);
-		//
-		//		bindTexture(resource);
-		//
+
+		bindTexture(resource);
+
 		GlStateManager.pushMatrix();
 		GlStateManager.enableRescaleNormal();
 

@@ -18,7 +18,7 @@ public class ItemBuiltinRendererMixin {
 
 	@Inject(at = @At("HEAD"), method = "method_3166", cancellable = true)
 	public void method_3166(ItemStack stack, CallbackInfo info) {
-		if (Registry.ITEMS.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
+		if (Registry.ITEM.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
 			BlockEntityRenderDispatcher.INSTANCE.renderEntity(this.flamingoRender);
 			info.cancel();
 		}

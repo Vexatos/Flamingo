@@ -40,10 +40,10 @@ minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:18w49a"
-	mappings "net.fabricmc:yarn:18w49a.1"
-	modCompile "net.fabricmc:fabric-loader:0.2.0.60"
-	modCompile "net.fabricmc:fabric:0.1.0.36"
+	minecraft "com.mojang:minecraft:18w50a"
+	mappings "net.fabricmc:yarn:18w50a.31"
+	modCompile "net.fabricmc:fabric-loader:0.2.0.70"
+	modCompile "net.fabricmc:fabric:0.1.1.55"
 }
 
 uploadArchives {
@@ -68,9 +68,9 @@ uploadArchives {
 					name project.archivesBaseName
 					packaging 'jar'
 					description project.archivesBaseName
-					url 'https://github.com/ProfessorProspector/Flamingo'
+					url 'https://github.com/Prospector/Flamingo'
 					scm {
-						url 'https://github.com/ProfessorProspector/Flamingo'
+						url 'https://github.com/Prospector/Flamingo'
 						connection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
 						developerConnection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
 					}

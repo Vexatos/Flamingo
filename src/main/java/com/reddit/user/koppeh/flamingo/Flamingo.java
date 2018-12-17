@@ -38,7 +38,7 @@ public class Flamingo implements ModInitializer {
 	}
 
 	public static Block register(String name, Block block, ItemGroup tab) {
-		Registry.register(Registry.BLOCKS, MOD_ID + ":" + name, block);
+		Registry.register(Registry.BLOCK, MOD_ID + ":" + name, block);
 		BlockItem item = new BlockItem(block, new Item.Settings().itemGroup(tab));
 		item.registerBlockItemMap(Item.BLOCK_ITEM_MAP, item);
 		register(name, item);
@@ -46,13 +46,13 @@ public class Flamingo implements ModInitializer {
 	}
 
 	public static Item register(String name, Item item) {
-		Registry.register(Registry.ITEMS, MOD_ID + ":" + name, item);
+		Registry.register(Registry.ITEM, MOD_ID + ":" + name, item);
 		return item;
 	}
 
 	public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType.Builder<T> builder) {
 		BlockEntityType<T> blockEntityType = builder.method_11034(null);
-		Registry.register(Registry.BLOCK_ENTITIES, MOD_ID + ":" + name, blockEntityType);
+		Registry.register(Registry.BLOCK_ENTITY, MOD_ID + ":" + name, blockEntityType);
 		return blockEntityType;
 	}
 
