@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "group": "flamingo",
+  "pattern": [
+	"o  ",
+	"ooo",
+	" / "
+  ],
+  "key": {
+	"o": {
+	  "item": "minecraft:pink_wool"
+	},
+	"/": {
+	  "item": "minecraft:stick"
+	}
+  },
+  "result": {
+	"item": "flamingo:flamingo",
+	"count": 1
+  }
+}

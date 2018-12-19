@@ -1,38 +1,51 @@
 package com.reddit.user.koppeh.flamingo;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.block.BlockItem;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.registry.Registry;
 
-@Mod(modid = "flamingo", version = "1.12-1.11", useMetadata = true, dependencies = "required-after:forge@[14.21.1.2395,)")
-public class Flamingo {
+public class Flamingo implements ModInitializer {
 
-	@Instance("Flamingo")
-	public static Flamingo instance;
+	public static final String MOD_ID = "flamingo";
 
-	@SidedProxy(clientSide = "com.reddit.user.koppeh.flamingo.ClientProxy",
-		serverSide = "com.reddit.user.koppeh.flamingo.CommonProxy")
-	public static CommonProxy proxy;
+	public static final Block FLAMINGO_BLOCK;
+	public static final BlockEntityType<FlamingoBlockEntity> FLAMINGO_BLOCK_ENTITY;
 
-	public static BlockFlamingo flamingo;
-
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		initializeItems();
-		GameRegistry.registerTileEntity(TileEntityFlamingo.class, "flamingo.flamingo");
-		proxy.registerItemModels();
+	static {
+		FLAMINGO_BLOCK = register("flamingo", new FlamingoBlock(FabricBlockSettings.create(Material.WOOL).setMapColor(MaterialColor.PINK).setHardness(1.5F).setSoundGroup(BlockSoundGroup.WOOL).build()), ItemGroup.DECORATIONS);
+		FLAMINGO_BLOCK_ENTITY = register("flamingo", BlockEntityType.Builder.create(FlamingoBlockEntity::new));
 	}
 
-	@Mod.EventHandler
-	public void load(FMLInitializationEvent event) {
-		proxy.registerRenderers();
+	public static Block register(String name, Block block, ItemGroup tab) {
+		Registry.register(Registry.BLOCK, MOD_ID + ":" + name, block);
+		BlockItem item = new BlockItem(block, new Item.Settings().itemGroup(tab));
+		item.registerBlockItemMap(Item.BLOCK_ITEM_MAP, item);
+		register(name, item);
+		return block;
 	}
 
-	private void initializeItems() {
-		flamingo = new BlockFlamingo();
+	public static Item register(String name, Item item) {
+		Registry.register(Registry.ITEM, MOD_ID + ":" + name, item);
+		return item;
 	}
 
+	public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType.Builder<T> builder) {
+		BlockEntityType<T> blockEntityType = builder.method_11034(null);
+		Registry.register(Registry.BLOCK_ENTITY, MOD_ID + ":" + name, blockEntityType);
+		return blockEntityType;
+	}
+
+	@Override
+	public void onInitialize() {
+
+	}
 }
