@@ -3,7 +3,10 @@
   "name": "Pink Flamingo",
   "version": "0.1.0",
   "side": "universal",
-  "initializer": "com.reddit.user.koppeh.flamingo.Flamingo",
+  "initializers": [
+	"com.reddit.user.koppeh.flamingo.Flamingo",
+	"com.reddit.user.koppeh.flamingo.FlamingoClient"
+  ],
   "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live.",
   "mixins": {
 	"client": "mixins.flamingo.client.json"
