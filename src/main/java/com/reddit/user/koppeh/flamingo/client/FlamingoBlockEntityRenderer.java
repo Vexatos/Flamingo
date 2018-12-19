@@ -1,6 +1,8 @@
-package com.reddit.user.koppeh.flamingo;
+package com.reddit.user.koppeh.flamingo.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.reddit.user.koppeh.flamingo.FlamingoBlock;
+import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.BlockView;

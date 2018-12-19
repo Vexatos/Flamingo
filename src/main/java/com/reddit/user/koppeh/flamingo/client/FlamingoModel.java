@@ -1,4 +1,4 @@
-package com.reddit.user.koppeh.flamingo;
+package com.reddit.user.koppeh.flamingo.client;
 
 import net.minecraft.client.model.Cuboid;
 import net.minecraft.client.model.Model;

@@ -20,8 +20,6 @@ plugins {
 }
 
 apply plugin: LoomGradlePlugin
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 
 
 sourceCompatibility = 1.8
@@ -29,12 +27,7 @@ targetCompatibility = 1.8
 
 group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "1.0.0"
-
-def ENV = System.getenv()
-if (ENV.BUILD_NUMBER) {
-	version = version + "-" + "${System.getenv().BUILD_NUMBER}"
-}
+version = "1.14-1.12"
 
 minecraft {
 }
@@ -44,38 +37,4 @@ dependencies {
 	mappings "net.fabricmc:yarn:18w50a.38"
 	modCompile "net.fabricmc:fabric-loader:0.2.0.70"
 	modCompile "net.fabricmc:fabric:0.1.1.58"
-}
-
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			//This is used when the build is done on a slave node
-			if (project.hasProperty('mavenPass')) {
-				println 'Uploading to remote Maven Repo'
-				repository(url: "http://mavenupload.modmuss50.me/") {
-					authentication(userName: "buildslave", password: project.getProperty('mavenPass'))
-				}
-			} else {
-				//this is when the build is executed on the master node
-				println 'Uploading to local Maven Repo'
-				repository(url: "file:///var/www/maven/")
-			}
-			pom {
-				groupId = project.group
-				version = project.version
-				artifactId = project.archivesBaseName
-				project {
-					name project.archivesBaseName
-					packaging 'jar'
-					description project.archivesBaseName
-					url 'https://github.com/Prospector/Flamingo'
-					scm {
-						url 'https://github.com/Prospector/Flamingo'
-						connection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
-						developerConnection 'scm:git:git@github.com:ProfessorProspector/Flamingo.git'
-					}
-				}
-			}
-		}
-	}
 }

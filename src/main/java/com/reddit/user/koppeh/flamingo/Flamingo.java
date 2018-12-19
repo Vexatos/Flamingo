@@ -2,7 +2,6 @@ package com.reddit.user.koppeh.flamingo;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.block.FabricBlockSettings;
-import net.fabricmc.fabric.client.render.BlockEntityRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
@@ -47,6 +46,6 @@ public class Flamingo implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		BlockEntityRendererRegistry.INSTANCE.register(FlamingoBlockEntity.class, new FlamingoBlockEntityRenderer());
+
 	}
 }

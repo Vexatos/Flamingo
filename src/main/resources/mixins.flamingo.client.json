@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.reddit.user.koppeh.flamingo.mixin",
+  "package": "com.reddit.user.koppeh.flamingo.client.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
 	"ItemBuiltinRendererMixin"

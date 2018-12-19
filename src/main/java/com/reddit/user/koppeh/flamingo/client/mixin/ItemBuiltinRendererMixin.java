@@ -1,4 +1,4 @@
-package com.reddit.user.koppeh.flamingo.mixin;
+package com.reddit.user.koppeh.flamingo.client.mixin;
 
 import com.reddit.user.koppeh.flamingo.Flamingo;
 import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
