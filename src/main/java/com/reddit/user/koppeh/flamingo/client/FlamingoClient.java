@@ -8,6 +8,5 @@ public class FlamingoClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		BlockEntityRendererRegistry.INSTANCE.register(FlamingoBlockEntity.class, new FlamingoBlockEntityRenderer());
-		System.out.println("hi");
 	}
 }
