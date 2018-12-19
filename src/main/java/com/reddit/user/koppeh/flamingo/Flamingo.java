@@ -1,8 +1,6 @@
 package com.reddit.user.koppeh.flamingo;
 
 import io.netty.buffer.Unpooled;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.fabricmc.fabric.client.render.BlockEntityRendererRegistry;
@@ -12,11 +10,12 @@ import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.packet.CustomPayloadClientPacket;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.block.BlockItem;
-import net.minecraft.server.network.packet.CustomPayloadServerPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
@@ -70,10 +69,9 @@ public class Flamingo implements ModInitializer {
 		});
 	}
 
-	@Environment(EnvType.CLIENT)
-	public static void sendWiggle(FlamingoBlockEntity flamingo) {
+	public static void sendWiggle(PlayerEntity player, FlamingoBlockEntity flamingo) {
 		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 		buf.writeBlockPos(flamingo.getPos());
-		MinecraftClient.getInstance().getNetworkHandler().getClientConnection().sendPacket(new CustomPayloadServerPacket(WIGGLE, buf));
+		((ServerPlayerEntity) player).networkHandler.sendPacket(new CustomPayloadClientPacket(WIGGLE, buf));
 	}
 }

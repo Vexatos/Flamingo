@@ -36,16 +36,19 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
 		}
 
-		GlStateManager.translated(x, y + 2.0, z + 1.0);
-		GlStateManager.rotated(1, 1.0F, -1.0F, -1.0F);
-		GlStateManager.translated(0.5F, 0.5F, 0.5F);
-		GlStateManager.rotated(rotation, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translated(x, y, z);
+		GlStateManager.rotated(1.0F, 1.0F, -1.0F, -1.0F);
+		GlStateManager.translated(0.5F, 0F, 0.5F);
+		GlStateManager.rotated(rotation, 0.0F, -1.0F, 0.0F);
+		GlStateManager.rotated(1, 1F, 0, 0.0F);
+		GlStateManager.translated(0.0, 1.5, 0.0);
+		GlStateManager.rotated(180, 1.0F, 0.0F, 0.0F);
 		GlStateManager.translated(0.0, 1.5, 0.0);
 		GlStateManager.rotated(wiggle, 0.0F, 0.0F, 1.0F);
 		GlStateManager.translated(0.0, -1.5, 0.0);
-		//
+
 		model.renderAll();
-		//
+
 		GlStateManager.disableRescaleNormal();
 		GlStateManager.popMatrix();
 

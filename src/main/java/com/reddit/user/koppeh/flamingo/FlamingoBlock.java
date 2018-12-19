@@ -57,8 +57,17 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BreakIn
 	@Override
 	public boolean onBreakInteract(BlockState blockState, World world, BlockPos blockPos, PlayerEntity playerEntity, Hand hand, Direction side) {
 		BlockEntity blockEntity = world.getBlockEntity(blockPos);
-		if (blockEntity instanceof FlamingoBlockEntity) {
-			Flamingo.sendWiggle((FlamingoBlockEntity) blockEntity);
+		if (!world.isClient && blockEntity instanceof FlamingoBlockEntity) {
+			world.addBlockAction(blockPos, this, 0, 0);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onBlockAction(BlockState state, World world, BlockPos pos, int var4, int var5) {
+		if (world.getBlockEntity(pos) != null) {
+			((FlamingoBlockEntity) world.getBlockEntity(pos)).wiggle();
+			return true;
 		}
 		return false;
 	}
