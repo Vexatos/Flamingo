@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 public class FlamingoBlock extends Block implements BlockEntityProvider, BreakInteractable {
 
 	public static final IntegerProperty ROTATION = IntegerProperty.create("rotation", 0, 15);
-	private static final VoxelShape BOUNDING_SHAPE = Block.createCubeShape(3, 0, 3, 13, 1, 13);
+	private static final VoxelShape BOUNDING_SHAPE = Block.createCubeShape(3, 0, 3, 13, 17, 13);
 
 	public FlamingoBlock(Settings settings) {
 		super(settings);

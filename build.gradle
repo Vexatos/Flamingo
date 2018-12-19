@@ -27,9 +27,9 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group= "com.reddit.user.koppeh.flamingo"
+group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "0.1.0"
+version = "1.0.0"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
