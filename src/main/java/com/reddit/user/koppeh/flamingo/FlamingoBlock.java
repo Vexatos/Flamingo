@@ -3,8 +3,8 @@ package com.reddit.user.koppeh.flamingo;
 import net.fabricmc.fabric.block.BreakInteractable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.RenderTypeBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,8 +33,8 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BreakIn
 	}
 
 	@Override
-	public RenderTypeBlock getRenderType(BlockState var1) {
-		return RenderTypeBlock.ENTITYBLOCK_ANIMATED;
+	public BlockRenderType getRenderType(BlockState var1) {
+		return BlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override

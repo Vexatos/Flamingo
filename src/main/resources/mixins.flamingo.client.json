@@ -3,7 +3,7 @@
   "package": "com.reddit.user.koppeh.flamingo.client.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-	"ItemBuiltinRendererMixin"
+	"ItemDynamicRendererMixin"
   ],
   "injectors": {
 	"defaultRequire": 1

@@ -1,10 +1,10 @@
 package com.reddit.user.koppeh.flamingo.client;
 
 import net.minecraft.client.model.Cuboid;
-import net.minecraft.client.model.Model;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.entity.Entity;
 
-public class FlamingoModel extends Model {
+public class FlamingoModel extends EntityModel {
 
 	Cuboid beak;
 	Cuboid beakBase;
@@ -92,7 +92,7 @@ public class FlamingoModel extends Model {
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 
-//		setRotationAngles(f, f1, f2, f3, f4, f5, null);
+		//		setRotationAngles(f, f1, f2, f3, f4, f5, null);
 		beak.render(f5);
 		beakBase.render(f5);
 		head.render(f5);
