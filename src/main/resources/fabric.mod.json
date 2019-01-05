@@ -1,7 +1,7 @@
 {
   "id": "flamingo",
   "name": "Pink Flamingo",
-  "version": "1.12",
+  "version": "$version",
   "side": "universal",
   "initializers": [
 	"com.reddit.user.koppeh.flamingo.Flamingo",
