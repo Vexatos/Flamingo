@@ -7,6 +7,9 @@
 	"com.reddit.user.koppeh.flamingo.Flamingo",
 	"com.reddit.user.koppeh.flamingo.client.FlamingoClient"
   ],
+  "requires": {
+	"fabric": "*"
+  },
   "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live.",
   "mixins": {
 	"client": "mixins.flamingo.client.json"
