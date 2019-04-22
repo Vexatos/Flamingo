@@ -2,7 +2,7 @@ package com.reddit.user.koppeh.flamingo.client;
 
 import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.client.render.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.render.BlockEntityRendererRegistry;
 
 public class FlamingoClient implements ClientModInitializer {
 	@Override
