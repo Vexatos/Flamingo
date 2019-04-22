@@ -1,17 +1,30 @@
 {
+  "schemaVersion": 1,
   "id": "flamingo",
   "name": "Pink Flamingo",
   "version": "$version",
-  "side": "universal",
-  "initializers": [
-	"com.reddit.user.koppeh.flamingo.Flamingo",
-	"com.reddit.user.koppeh.flamingo.client.FlamingoClient"
-  ],
+  "environment": "*",
+  "license": "MIT",
+  "icon": "assets/flamingo/icon.png",
+  "entrypoints": {
+	"main": [
+	  "com.reddit.user.koppeh.flamingo.Flamingo"
+	],
+	"client": [
+	  "com.reddit.user.koppeh.flamingo.client.FlamingoClient"
+	]
+  },
   "requires": {
 	"fabric": "*"
   },
+  "authors": [
+	"God Himself"
+  ],
+  "contributors": [
+	"Prospector"
+  ],
   "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live.",
-  "mixins": {
-	"client": "mixins.flamingo.client.json"
-  }
+  "mixins": [
+	"mixins.flamingo.json"
+  ]
 }

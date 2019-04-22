@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.reddit.user.koppeh.flamingo.client.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
+  "client": [
 	"ItemDynamicRendererMixin"
   ],
   "injectors": {
