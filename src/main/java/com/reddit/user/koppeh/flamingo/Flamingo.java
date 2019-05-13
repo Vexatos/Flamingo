@@ -22,7 +22,7 @@ public class Flamingo implements ModInitializer {
 
 	static {
 		FLAMINGO_BLOCK = register("flamingo", new FlamingoBlock(FabricBlockSettings.of(Material.WOOL).materialColor(MaterialColor.PINK).hardness(1.5F).sounds(BlockSoundGroup.WOOL).build()), ItemGroup.DECORATIONS);
-		FLAMINGO_BLOCK_ENTITY = register("flamingo", BlockEntityType.Builder.create(FlamingoBlockEntity::new));
+		FLAMINGO_BLOCK_ENTITY = register("flamingo", BlockEntityType.Builder.create(FlamingoBlockEntity::new, FLAMINGO_BLOCK));
 	}
 
 	public static Block register(String name, Block block, ItemGroup tab) {

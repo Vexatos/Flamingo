@@ -6,8 +6,8 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.VerticalEntityPosition;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateFactory;
@@ -29,11 +29,13 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, VerticalEntityPosition verticalEntityPosition_1) {
+	@Deprecated
+	public VoxelShape getOutlineShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1, EntityContext context) {
 		return OUTLINE_SHAPE;
 	}
 
 	@Override
+	@Deprecated
 	public BlockRenderType getRenderType(BlockState var1) {
 		return BlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
@@ -41,7 +43,7 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	@Override
 	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
-		builder.with(ROTATION);
+		builder.add(ROTATION);
 	}
 
 	@Override
@@ -65,6 +67,7 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
+	@Deprecated
 	public boolean onBlockAction(BlockState state, World world, BlockPos pos, int id, int value) {
 		if (world.getBlockEntity(pos) != null) {
 			((FlamingoBlockEntity) world.getBlockEntity(pos)).wiggle();
