@@ -11,7 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateFactory;
-import net.minecraft.state.property.IntegerProperty;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAttackInteractionAware {
 
-	public static final IntegerProperty ROTATION = IntegerProperty.create("rotation", 0, 15);
+	public static final IntProperty ROTATION = IntProperty.of("rotation", 0, 15);
 	private static final VoxelShape OUTLINE_SHAPE = Block.createCuboidShape(3, 0, 3, 13, 17, 13);
 
 	public FlamingoBlock(Settings settings) {

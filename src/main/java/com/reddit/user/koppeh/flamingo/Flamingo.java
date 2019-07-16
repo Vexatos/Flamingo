@@ -27,8 +27,8 @@ public class Flamingo implements ModInitializer {
 
 	public static Block register(String name, Block block, ItemGroup tab) {
 		Registry.register(Registry.BLOCK, MOD_ID + ":" + name, block);
-		BlockItem item = new BlockItem(block, new Item.Settings().itemGroup(tab));
-		item.registerBlockItemMap(Item.BLOCK_ITEM_MAP, item);
+		BlockItem item = new BlockItem(block, new Item.Settings().group(tab));
+		item.appendBlocks(Item.BLOCK_ITEMS, item);
 		register(name, item);
 		return block;
 	}
