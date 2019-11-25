@@ -1,33 +1,29 @@
 package com.reddit.user.koppeh.flamingo.client;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.reddit.user.koppeh.flamingo.FlamingoBlock;
 import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.BlockView;
-import org.lwjgl.opengl.GL11;
 
 public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlockEntity> {
 
 	private FlamingoModel model = new FlamingoModel();
 	private Identifier resource = new Identifier("flamingo", "textures/model/flamingo.png");
 
+	public FlamingoBlockEntityRenderer(BlockEntityRenderDispatcher renderDispatcher) {
+		super(renderDispatcher);
+	}
+
 	@Override
-	public void render(FlamingoBlockEntity flamingo, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(FlamingoBlockEntity flamingo, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
 		int rotation = 0;
 		float wiggle = 0;
-
-		GlStateManager.enableDepthTest();
-		GlStateManager.depthFunc(GL11.GL_LEQUAL);
-		GlStateManager.depthMask(true);
-
-		bindTexture(resource);
-
-		GlStateManager.pushMatrix();
-		GlStateManager.enableRescaleNormal();
-
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		if (flamingo != null) {
 			final BlockView world = flamingo.getWorld();
@@ -38,23 +34,19 @@ public class FlamingoBlockEntityRenderer extends BlockEntityRenderer<FlamingoBlo
 			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
 		}
 
-		GlStateManager.translated(x, y, z);
-		GlStateManager.rotated(1.0F, 1.0F, -1.0F, -1.0F);
-		GlStateManager.translated(0.5F, 0F, 0.5F);
-		GlStateManager.rotated(rotation, 0.0F, -1.0F, 0.0F);
-		GlStateManager.rotated(1, 1F, 0, 0.0F);
-		GlStateManager.translated(0.0, 1.5, 0.0);
-		GlStateManager.rotated(180, 1.0F, 0.0F, 0.0F);
-		GlStateManager.translated(0.0, 1.5, 0.0);
-		GlStateManager.rotated(wiggle, 0.0F, 0.0F, 1.0F);
-		GlStateManager.translated(0.0, -1.5, 0.0);
+		matrixStack.push();
 
-		model.renderAll();
+		matrixStack.translate(0.5F, 0, 0.5F);
+		matrixStack.multiply(Vector3f.NEGATIVE_Y.getDegreesQuaternion(rotation));
+		matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(1F));
+		matrixStack.translate(0.0, 1.5, 0.0);
+		matrixStack.multiply(Vector3f.POSITIVE_X.getDegreesQuaternion(180F));
+		matrixStack.translate(0.0, 1.5, 0.0);
+		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(wiggle));
+		matrixStack.translate(0.0, -1.5, 0.0);
 
-		GlStateManager.disableRescaleNormal();
-		GlStateManager.popMatrix();
+		model.render(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(resource)), i, j, 1F, 1F, 1F, 1F);
 
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		matrixStack.pop();
 	}
-
 }
