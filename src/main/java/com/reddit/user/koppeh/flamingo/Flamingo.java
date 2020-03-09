@@ -40,7 +40,7 @@ public class Flamingo implements ModInitializer {
 
 	public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType.Builder<T> builder) {
 		BlockEntityType<T> blockEntityType = builder.build(null);
-		Registry.register(Registry.BLOCK_ENTITY, MOD_ID + ":" + name, blockEntityType);
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, MOD_ID + ":" + name, blockEntityType);
 		return blockEntityType;
 	}
 

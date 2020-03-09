@@ -32,10 +32,10 @@ minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.15-pre2"
-	mappings "net.fabricmc:yarn:1.15-pre2+build.2:v2"
-	modCompile "net.fabricmc:fabric-loader:0.7.1+build.173"
-	modCompile "net.fabricmc.fabric-api:fabric-api:0.4.14+build.266-1.15"
+	minecraft "com.mojang:minecraft:1.15.2"
+	mappings "net.fabricmc:yarn:1.15.2+build.14:v2"
+	modCompile "net.fabricmc:fabric-loader:0.7.8+build.187"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.5.0+build.293-1.15"
 }
 
 processResources {
