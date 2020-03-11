@@ -69,11 +69,11 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+	public boolean onBlockAction(BlockState state, World world, BlockPos pos, int type, int data) {
 		if (world.getBlockEntity(pos) != null) {
 			((FlamingoBlockEntity) world.getBlockEntity(pos)).wiggle();
-			return ActionResult.SUCCESS;
+			return true;
 		}
-		return ActionResult.FAIL;
+		return false;
 	}
 }
