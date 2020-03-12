@@ -26,7 +26,7 @@ targetCompatibility = 1.8
 
 group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "1.15-1.16"
+version = "1.15.2-1.16"
 
 minecraft {
 }
