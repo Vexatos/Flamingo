@@ -10,9 +10,11 @@ import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -41,7 +43,7 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
-	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		super.appendProperties(builder);
 		builder.add(ROTATION);
 	}
@@ -67,8 +69,7 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
-	@Deprecated
-	public boolean onBlockAction(BlockState state, World world, BlockPos pos, int id, int value) {
+	public boolean onBlockAction(BlockState state, World world, BlockPos pos, int type, int data) {
 		if (world.getBlockEntity(pos) != null) {
 			((FlamingoBlockEntity) world.getBlockEntity(pos)).wiggle();
 			return true;
