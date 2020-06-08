@@ -5,6 +5,7 @@ import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -19,7 +20,7 @@ public class ItemDynamicRendererMixin {
 	private final FlamingoBlockEntity flamingoRender = new FlamingoBlockEntity();
 
 	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
-	public void render(ItemStack stack, MatrixStack matrix, VertexConsumerProvider vertexConsumerProvider, int light, int overlay, CallbackInfo info) {
+	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrix, VertexConsumerProvider vertexConsumerProvider, int light, int overlay, CallbackInfo info) {
 		if (Registry.ITEM.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
 			BlockEntityRenderDispatcher.INSTANCE.renderEntity(this.flamingoRender, matrix, vertexConsumerProvider, light, overlay);
 			info.cancel();

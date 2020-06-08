@@ -9,7 +9,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.7-SNAPSHOT"
+		classpath "net.fabricmc:fabric-loom:0.4-SNAPSHOT"
 	}
 }
 
@@ -26,16 +26,16 @@ targetCompatibility = 1.8
 
 group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "20w20b-1.17"
+version = "1.16-pre2-1.18"
 
 minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:20w20b"
-	mappings "net.fabricmc:yarn:20w20b+build.7:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.7.8+build.187"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.10.9+build.346-1.16"
+	minecraft "com.mojang:minecraft:1.16-pre2"
+    mappings "net.fabricmc:yarn:1.16-pre2+build.21:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.8.7+build.201"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.11.7+build.356-1.16"
 }
 
 processResources {
