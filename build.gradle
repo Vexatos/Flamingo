@@ -1,49 +1,36 @@
-import net.fabricmc.loom.LoomGradlePlugin
-
-buildscript {
-	repositories {
-		jcenter()
-		maven {
-			name = 'Fabric'
-			url = 'http://maven.modmuss50.me/'
-		}
-	}
-	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.4-SNAPSHOT"
-	}
-}
-
 plugins {
-	id 'java'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'eclipse'
+	id 'java'
 	id 'idea'
 }
 
-apply plugin: LoomGradlePlugin
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.16
+targetCompatibility = 1.16
 
 group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "1.16-1.17"
-
-minecraft {
-}
+version = "1.17-1.18"
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.16"
-	mappings "net.fabricmc:yarn:1.16+build.1:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.13.1+build.370-1.16"
+	minecraft "com.mojang:minecraft:1.17-pre1"
+	mappings "net.fabricmc:yarn:1.17-pre1+build.1:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.11.3"
+
+	//Fabric api
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.34.8+1.17"
 }
 
 processResources {
-	from(sourceSets.main.resources.srcDirs) {
-		include 'fabric.mod.json'
-		expand version: project.version
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
 	}
-	from(sourceSets.main.resources.srcDirs) {
-		exclude 'fabric.mod.json'
-	}
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 16
 }
