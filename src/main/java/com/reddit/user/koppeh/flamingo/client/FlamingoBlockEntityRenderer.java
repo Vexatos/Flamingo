@@ -16,41 +16,41 @@ import net.minecraft.world.BlockView;
 
 public class FlamingoBlockEntityRenderer implements BlockEntityRenderer<FlamingoBlockEntity> {
 
-    public static final EntityModelLayer flamingoLayer = new EntityModelLayer(new Identifier(Flamingo.MOD_ID, "flamingo"), "flamingo");
-    private final Identifier resource = new Identifier("flamingo", "textures/model/flamingo.png");
-    private final ModelPart model;
+	public static final EntityModelLayer flamingoLayer = new EntityModelLayer(new Identifier(Flamingo.MOD_ID, "flamingo"), "flamingo");
+	private final Identifier resource = new Identifier("flamingo", "textures/model/flamingo.png");
+	private final ModelPart model;
 
-    public FlamingoBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
-        this.model = ctx.getLayerModelPart(flamingoLayer);
-    }
+	public FlamingoBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+		this.model = ctx.getLayerModelPart(flamingoLayer);
+	}
 
-    @Override
-    public void render(FlamingoBlockEntity flamingo, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
-        int rotation = 0;
-        float wiggle = 0;
+	@Override
+	public void render(FlamingoBlockEntity flamingo, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, int j) {
+		int rotation = 0;
+		float wiggle = 0;
 
-        if (flamingo != null) {
-            final BlockView world = flamingo.getWorld();
-            if (world != null) {
-                rotation = world.getBlockState(flamingo.getPos()).get(FlamingoBlock.ROTATION) * 360 / 16;
-            }
+		if (flamingo != null) {
+			final BlockView world = flamingo.getWorld();
+			if (world != null) {
+				rotation = world.getBlockState(flamingo.getPos()).get(FlamingoBlock.ROTATION) * 360 / 16;
+			}
 
-            wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
-        }
+			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
+		}
 
-        matrixStack.push();
+		matrixStack.push();
 
-        matrixStack.translate(0.5F, 0, 0.5F);
-        matrixStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(rotation));
-        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(1F));
-        matrixStack.translate(0.0, 1.5, 0.0);
-        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180F));
-        matrixStack.translate(0.0, 1.5, 0.0);
-        matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(wiggle));
-        matrixStack.translate(0.0, -1.5, 0.0);
+		matrixStack.translate(0.5F, 0, 0.5F);
+		matrixStack.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion(rotation));
+		matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(1F));
+		matrixStack.translate(0.0, 1.5, 0.0);
+		matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180F));
+		matrixStack.translate(0.0, 1.5, 0.0);
+		matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(wiggle));
+		matrixStack.translate(0.0, -1.5, 0.0);
 
-        model.render(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(resource)), i, j, 1F, 1F, 1F, 1F);
+		model.render(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(resource)), i, j, 1F, 1F, 1F, 1F);
 
-        matrixStack.pop();
-    }
+		matrixStack.pop();
+	}
 }

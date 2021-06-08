@@ -6,10 +6,10 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegi
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
 
 public class FlamingoClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
-        BlockEntityRendererRegistry.INSTANCE.register(Flamingo.FLAMINGO_BLOCK_ENTITY, FlamingoBlockEntityRenderer::new);
+	@Override
+	public void onInitializeClient() {
+		BlockEntityRendererRegistry.INSTANCE.register(Flamingo.FLAMINGO_BLOCK_ENTITY, FlamingoBlockEntityRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(FlamingoBlockEntityRenderer.flamingoLayer, FlamingoModel::getModel);
-    }
+		EntityModelLayerRegistry.registerModelLayer(FlamingoBlockEntityRenderer.flamingoLayer, FlamingoModel::getModel);
+	}
 }

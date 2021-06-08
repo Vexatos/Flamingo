@@ -18,14 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BuiltinModelItemRenderer.class)
 public class ItemDynamicRendererMixin {
-    private final MinecraftClient mc = MinecraftClient.getInstance();
-    private final FlamingoBlockEntity flamingoRender = new FlamingoBlockEntity(BlockPos.ORIGIN, Flamingo.FLAMINGO_BLOCK.getDefaultState());
+	private final MinecraftClient mc = MinecraftClient.getInstance();
+	private final FlamingoBlockEntity flamingoRender = new FlamingoBlockEntity(BlockPos.ORIGIN, Flamingo.FLAMINGO_BLOCK.getDefaultState());
 
-    @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrix, VertexConsumerProvider vertexConsumerProvider, int light, int overlay, CallbackInfo info) {
-        if (Registry.ITEM.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
-            mc.getBlockEntityRenderDispatcher().renderEntity(this.flamingoRender, matrix, vertexConsumerProvider, light, overlay);
-            info.cancel();
-        }
-    }
+	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
+	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrix, VertexConsumerProvider vertexConsumerProvider, int light, int overlay, CallbackInfo info) {
+		if (Registry.ITEM.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
+			mc.getBlockEntityRenderDispatcher().renderEntity(this.flamingoRender, matrix, vertexConsumerProvider, light, overlay);
+			info.cancel();
+		}
+	}
 }
