@@ -77,7 +77,7 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 
 	@Override
 	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return !world.isClient() ? null : FlamingoBlockEntity::tick;
+		return world.isClient() ? FlamingoBlockEntity::tick : null;
 	}
 
 	@Override
