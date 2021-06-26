@@ -1,25 +1,23 @@
 package com.reddit.user.koppeh.flamingo;
 
 import net.fabricmc.fabric.api.block.BlockAttackInteractionAware;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.event.listener.GameEventListener;
+import org.jetbrains.annotations.Nullable;
 
 public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAttackInteractionAware {
 
@@ -49,13 +47,8 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView var1) {
-		return new FlamingoBlockEntity();
-	}
-
-	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity player, ItemStack stack) {
-		int rotation = ((Math.round((((player.yaw + 180) % 360) * 16 / 360)) % 16) + 16) % 16;
+		int rotation = ((Math.round((((player.getYaw() + 180) % 360) * 16 / 360)) % 16) + 16) % 16;
 		world.setBlockState(pos, state.with(ROTATION, rotation), 3);
 	}
 
@@ -75,5 +68,20 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return new FlamingoBlockEntity(pos, state);
+	}
+
+	@Override
+	public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return world.isClient() ? FlamingoBlockEntity::tick : null;
+	}
+
+	@Override
+	public @Nullable <T extends BlockEntity> GameEventListener getGameEventListener(World world, T blockEntity) {
+		return null;
 	}
 }
