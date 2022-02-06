@@ -3,15 +3,21 @@ package com.reddit.user.koppeh.flamingo.client;
 import com.reddit.user.koppeh.flamingo.Flamingo;
 import com.reddit.user.koppeh.flamingo.FlamingoBlock;
 import com.reddit.user.koppeh.flamingo.FlamingoBlockEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 
 public class FlamingoBlockEntityRenderer implements BlockEntityRenderer<FlamingoBlockEntity> {
@@ -19,6 +25,7 @@ public class FlamingoBlockEntityRenderer implements BlockEntityRenderer<Flamingo
 	public static final EntityModelLayer flamingoLayer = new EntityModelLayer(new Identifier(Flamingo.MOD_ID, "flamingo"), "flamingo");
 	private final Identifier resource = new Identifier("flamingo", "textures/model/flamingo.png");
 	private final ModelPart model;
+	private static final FlamingoBlockEntity flamingoRender = new FlamingoBlockEntity(BlockPos.ORIGIN, Flamingo.FLAMINGO_BLOCK.getDefaultState());
 
 	public FlamingoBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
 		this.model = ctx.getLayerModelPart(flamingoLayer);
@@ -32,7 +39,9 @@ public class FlamingoBlockEntityRenderer implements BlockEntityRenderer<Flamingo
 		if (flamingo != null) {
 			final BlockView world = flamingo.getWorld();
 			if (world != null) {
-				rotation = world.getBlockState(flamingo.getPos()).get(FlamingoBlock.ROTATION) * 360 / 16;
+				BlockState state = world.getBlockState(flamingo.getPos());
+				if (!(state.getBlock() instanceof FlamingoBlock)) return;
+				rotation = state.get(FlamingoBlock.ROTATION) * 360 / 16;
 			}
 
 			wiggle = (float) Math.sin(flamingo.wiggle + partialTicks) * flamingo.wiggleStrength;
@@ -52,5 +61,11 @@ public class FlamingoBlockEntityRenderer implements BlockEntityRenderer<Flamingo
 		model.render(matrixStack, vertexConsumerProvider.getBuffer(RenderLayer.getEntitySolid(resource)), i, j, 1F, 1F, 1F, 1F);
 
 		matrixStack.pop();
+	}
+
+	public static void renderItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrix, VertexConsumerProvider vcp, int light, int overlay) {
+		if (Registry.ITEM.getId(stack.getItem()).equals(new Identifier(Flamingo.MOD_ID, "flamingo"))) {
+			MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(flamingoRender, matrix, vcp, light, overlay);
+		}
 	}
 }

@@ -1,22 +1,22 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'eclipse'
 	id 'java'
 	id 'idea'
 }
 
-sourceCompatibility = 1.16
-targetCompatibility = 1.16
+sourceCompatibility = 1.17
+targetCompatibility = 1.17
 
 group = "com.reddit.user.koppeh.flamingo"
 archivesBaseName = "Flamingo"
-version = "1.17-1.18"
+version = "1.18-1.19"
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.17"
-	mappings "net.fabricmc:yarn:1.17+build.1:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.11.3"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.34.9+1.17"
+	minecraft "com.mojang:minecraft:1.18.1"
+	mappings "net.fabricmc:yarn:1.18.1+build.22:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.13.1"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.46.4+1.18"
 }
 
 processResources {
@@ -30,5 +30,5 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
-	it.options.release = 16
+	it.options.release = 17
 }
