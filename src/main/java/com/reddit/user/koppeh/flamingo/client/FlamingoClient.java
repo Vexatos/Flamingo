@@ -2,14 +2,15 @@ package com.reddit.user.koppeh.flamingo.client;
 
 import com.reddit.user.koppeh.flamingo.Flamingo;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 
 public class FlamingoClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		BlockEntityRendererRegistry.INSTANCE.register(Flamingo.FLAMINGO_BLOCK_ENTITY, FlamingoBlockEntityRenderer::new);
-
+		BlockEntityRendererRegistry.register(Flamingo.FLAMINGO_BLOCK_ENTITY, FlamingoBlockEntityRenderer::new);
 		EntityModelLayerRegistry.registerModelLayer(FlamingoBlockEntityRenderer.flamingoLayer, FlamingoModel::getModel);
+		BuiltinItemRendererRegistry.INSTANCE.register(Flamingo.FLAMINGO_BLOCK.asItem(), FlamingoBlockEntityRenderer::renderItem);
 	}
 }
