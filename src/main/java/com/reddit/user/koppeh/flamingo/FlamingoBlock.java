@@ -10,7 +10,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -54,11 +56,21 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 
 	@Override
 	public boolean onAttackInteraction(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, Direction direction) {
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (!world.isClient && blockEntity instanceof FlamingoBlockEntity) {
+		onClick(world, pos);
+		return false;
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		onClick(world, pos);
+		return ActionResult.SUCCESS;
+	}
+
+	private void onClick(World world, BlockPos pos)
+	{
+		if (!world.isClient && world.getBlockEntity(pos) instanceof FlamingoBlockEntity) {
 			world.addSyncedBlockEvent(pos, this, 0, 0);
 		}
-		return false;
 	}
 
 	@Override
