@@ -25,5 +25,8 @@
   "contributors": [
 	"Prospector"
   ],
-  "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live."
+  "description": "Adds a decorative pink flamingo block. Suggested by and dedicated to Reddit. Inspired by Dig Build Live.",
+  "mixins": [
+    "flamingo.mixins.json"
+  ]
 }

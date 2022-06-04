@@ -56,21 +56,10 @@ public class FlamingoBlock extends Block implements BlockEntityProvider, BlockAt
 
 	@Override
 	public boolean onAttackInteraction(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, Direction direction) {
-		onClick(world, pos);
-		return false;
-	}
-
-	@Override
-	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		onClick(world, pos);
-		return ActionResult.SUCCESS;
-	}
-
-	private void onClick(World world, BlockPos pos)
-	{
 		if (!world.isClient && world.getBlockEntity(pos) instanceof FlamingoBlockEntity) {
 			world.addSyncedBlockEvent(pos, this, 0, 0);
 		}
+		return false;
 	}
 
 	@Override
