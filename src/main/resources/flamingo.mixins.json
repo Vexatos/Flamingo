@@ -1,0 +1,7 @@
+{
+  "package": "com.reddit.user.koppeh.flamingo.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "MixinClientPlayerInteractionManager"
+  ]
+}
